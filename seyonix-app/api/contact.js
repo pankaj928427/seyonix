@@ -18,11 +18,14 @@ export default async function handler(req, res) {
     }
   });
 
-  const mailOptions = {
-    from: process.env.EMAIL_USER,
-    to: process.env.EMAIL_USER,
-    subject: subject || "New Seyonix Contact Message",
-    text: `
+  try {
+
+    // 1️⃣ EMAIL TO YOU (notification)
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: process.env.EMAIL_USER,
+      subject: subject || "New Seyonix Contact Message",
+      text: `
 Name: ${name}
 Email: ${email}
 Company: ${company}
@@ -30,11 +33,28 @@ Company: ${company}
 Message:
 ${message}
 `
-  };
+    });
 
-  try {
+    // 2️⃣ AUTO REPLY TO USER
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER,
+      to: email,
+      subject: "Welcome to Seyonix Groups",
+      html: `
+      <h2>Hello ${name},</h2>
 
-    await transporter.sendMail(mailOptions);
+      <p>Thank you for contacting <b>Seyonix Groups</b>.</p>
+
+      <p>Your message has been successfully received.</p>
+
+      <p>Our team will review it and respond shortly.</p>
+
+      <br/>
+
+      <p>— Seyonix Groups</p>
+      <p><i>Engineering Legacy. Building Empires.</i></p>
+      `
+    });
 
     return res.status(200).json({ success: true });
 
@@ -45,5 +65,4 @@ ${message}
     return res.status(500).json({ success: false });
 
   }
-
 }
