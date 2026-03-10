@@ -542,7 +542,7 @@ function Contact() {
     try {
   
       const response = await axios.post(
-        "http://localhost:5000/contact",
+        "/api/contact",
         form
       );
   
@@ -553,11 +553,11 @@ function Contact() {
       setTimeout(() => setSent(false), 4000);
   
       setForm({
-        name:"",
-        email:"",
-        company:"",
-        subject:"",
-        message:""
+        name: "",
+        email: "",
+        company: "",
+        subject: "",
+        message: ""
       });
   
     } catch (error) {
