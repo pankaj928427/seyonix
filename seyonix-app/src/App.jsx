@@ -532,7 +532,8 @@ function Contact() {
   const [hRef, inView] = useInView();
   const [form, setForm] = useState({ name:"", email:"", company:"", subject:"", message:"" });
   const [sent, setSent] = useState(false);
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!form.name || !form.email) {
       alert("Name and Email required");
