@@ -175,9 +175,16 @@ function Loader({ onDone }) {
 function Nav({ scrolled, activeSection }) {
   const scrollTo = id => { document.getElementById(id.toLowerCase())?.scrollIntoView({ behavior:"smooth" }); };
   return (
-    <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:1000, display:"flex", alignItems:"center", justifyContent:"space-between", padding: scrolled ? "14px 60px" : "22px 60px", background: scrolled ? "rgba(5,11,26,0.97)" : "linear-gradient(to bottom,rgba(8,8,8,0.9),transparent)", borderBottom: scrolled ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(212,175,55,0.04)", backdropFilter:"blur(12px)", transition:"all .4s" }}>
+    <nav style={{ position:"fixed", top:0, left:0, right:0, zIndex:1000, display:"flex", alignItems:"center", justifyContent:"space-between", padding: scrolled ? "14px clamp(16px,4vw,60px)" : "22px clamp(16px,4vw,60px)", background: scrolled ? "rgba(5,11,26,0.97)" : "linear-gradient(to bottom,rgba(8,8,8,0.9),transparent)", borderBottom: scrolled ? "1px solid rgba(212,175,55,0.2)" : "1px solid rgba(212,175,55,0.04)", backdropFilter:"blur(12px)", transition:"all .4s" }}>
       <div style={{ fontFamily:"'Cinzel Decorative',serif", fontSize:"1.2rem", fontWeight:700, background:"linear-gradient(135deg,#D4AF37,#E6C87A)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:"0.1em", cursor:"pointer" }} onClick={() => window.scrollTo({top:0,behavior:"smooth"})}>SEYONIX</div>
-      <ul style={{ display:"flex", gap:36, listStyle:"none", margin:0, padding:0 }}>
+      <ul style={{
+  display:"flex",
+  gap:"clamp(10px,3vw,36px)",
+  listStyle:"none",
+  margin:0,
+  padding:0,
+  flexWrap:"wrap"
+}}>
         {NAV_LINKS.map(l => (
           <li key={l}>
             <button onClick={() => scrollTo(l)} style={{ background:"none", border:"none", fontFamily:"'Cinzel',serif", fontSize:"0.65rem", letterSpacing:"0.22em", color: activeSection===l.toLowerCase() ? "#D4AF37" : "#C9CCD6", textTransform:"uppercase", cursor:"pointer", transition:"color .3s", padding:"4px 0", borderBottom: activeSection===l.toLowerCase() ? "1px solid #D4AF37" : "1px solid transparent" }}>{l}</button>
@@ -415,7 +422,7 @@ function Products() {
     <section id="kingdom" style={{ padding:"110px 60px", background:"linear-gradient(160deg,#050B1A,#080808 60%)" }}>
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <div ref={hRef} style={{ textAlign:"center" }}><SectionHeader inView={inView} center label="The Royal Arsenal" title="Our Royal Innovations" sub="Three crowns. Three kingdoms. One unstoppable empire." /></div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:2, marginTop:72 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))", gap:2, marginTop:72 }}>
           {PRODUCTS.map((p,i) => <ProductCard key={i} p={p} inView={inView} delay={i*.15} />)}
         </div>
       </div>
@@ -469,7 +476,7 @@ function Tech() {
     <section id="power" style={{ padding:"110px 60px", background:"#080808" }}>
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <div ref={hRef} style={{ textAlign:"center" }}><SectionHeader inView={inView} center label="Infrastructure of Power" title="The Power Behind the Throne" sub="Six pillars of technological supremacy holding up the Seyonix empire." /></div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:2, marginTop:72 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))", gap:2, marginTop:72 }}>
           {TECH.map((t,i) => <TechItem key={i} t={t} inView={inView} delay={i*.1} />)}
         </div>
       </div>
@@ -506,7 +513,7 @@ function Why() {
     <section id="authority" style={{ padding:"110px 60px", background:"linear-gradient(160deg,#050B1A 0%,#080808 100%)" }}>
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <div ref={hRef} style={{ textAlign:"center" }}><SectionHeader inView={inView} center label="The Reason to Bow" title="Why We Rule" sub="Six sovereign pillars that make Seyonix Groups not just a company — but a dynasty." /></div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:2, marginTop:72 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(260px, 1fr))", gap:2, marginTop:72 }}>
           {WHY.map((w,i) => <WhyCard key={i} w={w} inView={inView} delay={i*.1} />)}
         </div>
       </div>
@@ -580,7 +587,7 @@ function Contact() {
     <section id="alliance" style={{ padding:"110px 60px", background:"radial-gradient(ellipse at 70% 50%,rgba(30,58,138,0.1) 0%,transparent 60%),#080808" }}>
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <div ref={hRef} style={{ textAlign:"center" }}><SectionHeader inView={inView} center label="Open the Gates" title="Forge an Alliance" sub="The empire welcomes those worthy of partnership. Reach us and begin your legacy." /></div>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:72, marginTop:72 }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(320px, 1fr))", gap:72, marginTop:72 }}>
           {/* Info */}
           <div style={{ opacity:inView?1:0, transform:inView?"translateY(0)":"translateY(40px)", transition:"all .9s .2s cubic-bezier(.16,1,.3,1)" }}>
             {DETAILS.map((d,i) => (
