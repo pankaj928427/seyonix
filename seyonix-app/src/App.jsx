@@ -183,7 +183,7 @@ function Nav({ scrolled, activeSection }) {
   listStyle:"none",
   margin:0,
   padding:0,
-  flexWrap:"wrap"
+  flexWrap:"nowrap"
 }}>
         {NAV_LINKS.map(l => (
           <li key={l}>
@@ -247,7 +247,7 @@ function Hero() {
     position:"relative",
     zIndex:10,
     textAlign:"center",
-    padding:"0 24px",
+    padding:"0 clamp(16px,5vw,40px)",
     display:"flex",
     flexDirection:"column",
     alignItems:"center",
@@ -356,7 +356,7 @@ function Founder() {
     <section id="visionary" style={{ padding:"110px 60px", background:"radial-gradient(ellipse at 30% 50%,rgba(30,58,138,0.14) 0%,transparent 60%),#080808", position:"relative" }}>
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <div ref={hRef}><SectionHeader inView={inView} label="The Architect" title="The Visionary Leader" /></div>
-        <div style={{ display:"grid", gridTemplateColumns:"360px 1fr", gap:90, marginTop:72, alignItems:"start" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(280px,1fr))", gap:90, marginTop:72, alignItems:"start" }}>
           {/* Card */}
           <div style={{ border:"1px solid rgba(212,175,55,0.22)", background:"linear-gradient(145deg,rgba(212,175,55,0.07),rgba(5,11,26,0.8))", padding:"44px 40px", textAlign:"center", position:"relative", opacity:inView?1:0, transform:inView?"translateY(0)":"translateY(50px)", transition:"all .9s .2s cubic-bezier(.16,1,.3,1)" }}>
             {[["top","left","2px 0 0 2px"],["bottom","right","0 2px 2px 0"]].map(([v,h,bw],i)=>(
@@ -702,7 +702,7 @@ function Footer() {
           maxWidth: 1280,
           margin: "0 auto",
           display: "grid",
-          gridTemplateColumns: "2fr 1fr 1fr 1fr",
+          gridTemplateColumns: "repeat(auto-fit, minmax(200px,1fr))",
           gap: 50
         }}
       >
