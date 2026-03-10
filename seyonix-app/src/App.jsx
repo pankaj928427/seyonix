@@ -594,7 +594,13 @@ function Contact() {
             ))}
             <div style={{ marginTop:40 }}>
               <div style={{ fontFamily:"'Cinzel',serif", fontSize:"0.58rem", letterSpacing:"0.4em", color:"#D4AF37", textTransform:"uppercase", marginBottom:18 }}>◆ The Kingdom</div>
-              <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:2 }}>
+              <div
+  style={{
+    display: "grid",
+    gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+    gap: 20
+  }}
+>
                 {PRODUCTS.map((p,i) => (
                   <div key={i} style={{ padding:"18px", border:"1px solid rgba(212,175,55,0.15)", background:"rgba(255,255,255,0.02)", textAlign:"center", cursor:"pointer", transition:"all .3s" }}
                     onMouseEnter={e=>{e.currentTarget.style.borderColor="rgba(212,175,55,0.4)";}}
