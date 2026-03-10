@@ -303,7 +303,7 @@ function About() {
     <section id="legacy-section" style={{ padding:"110px 60px", background:"linear-gradient(160deg,#080808 0%,#050B1A 50%,#080808 100%)", position:"relative" }}>
       <div style={{ maxWidth:1280, margin:"0 auto" }}>
         <div ref={hRef}><SectionHeader inView={inView} label="Since the Beginning" title="The Seyonix Legacy" sub="A story of ambition forged in code, vision cast in steel, and excellence measured in decades yet to come." /></div>
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:90, marginTop:72, alignItems:"start" }}>
+        <div style={{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(320px, 1fr))", gap:90, marginTop:72, alignItems:"start" }}>
           {/* Timeline */}
           <div style={{ position:"relative", paddingLeft:28, opacity:inView?1:0, transform:inView?"translateY(0)":"translateY(50px)", transition:"all .9s .2s cubic-bezier(.16,1,.3,1)" }}>
             <div style={{ position:"absolute", left:0, top:0, bottom:0, width:1, background:"linear-gradient(to bottom,#D4AF37,transparent)" }} />
