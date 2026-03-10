@@ -6,10 +6,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: "Method not allowed" });
   }
 
-  const { name, email, message } = req.body;
+  const { name, email, company, subject, message } = req.body;
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
@@ -17,17 +19,31 @@ export default async function handler(req, res) {
   });
 
   const mailOptions = {
-    from: email,
+    from: process.env.EMAIL_USER,
     to: process.env.EMAIL_USER,
-    subject: "New Seyonix Contact Message",
+    subject: subject || "New Seyonix Contact Message",
     text: `
-    Name: ${name}
-    Email: ${email}
-    Message: ${message}
-    `
+Name: ${name}
+Email: ${email}
+Company: ${company}
+
+Message:
+${message}
+`
   };
 
-  await transporter.sendMail(mailOptions);
+  try {
 
-  res.status(200).json({ success: true });
+    await transporter.sendMail(mailOptions);
+
+    return res.status(200).json({ success: true });
+
+  } catch (error) {
+
+    console.error(error);
+
+    return res.status(500).json({ success: false });
+
+  }
+
 }
